@@ -1,1 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHIPTERM</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scanlines" aria-hidden="true"></div>
 
+  <header class="app-header" role="banner">
+    <div class="brand-wrap">
+      <a class="brand" href="#" aria-label="CHIPTERM home">
+        <img src="assets/logo.svg" alt="CHIPTERM logo" class="logo" />
+        <span class="site-title">CHIPTERM</span>
+      </a>
+      <span class="cursor" aria-hidden="true"></span>
+    </div>
+
+    <div class="terminal-bar" aria-hidden="true">
+      <span class="dot dot-red"></span>
+      <span class="dot dot-yellow"></span>
+      <span class="dot dot-green"></span>
+    </div>
+
+    <nav class="top-nav" aria-label="Panel navigation">
+      <button class="nav-btn is-active" data-panel="0" aria-controls="panel-upload">1. Upload</button>
+      <button class="nav-btn" data-panel="1" aria-controls="panel-preview">2. Preview</button>
+      <button class="nav-btn" data-panel="2" aria-controls="panel-about">3. About</button>
+    </nav>
+
+    <p id="statusLine" class="status-line" aria-live="polite">STATUS: READY</p>
+  </header>
+
+  <main class="panel-viewport" aria-live="polite">
+    <div id="panelTrack" class="panel-track">
+      <section id="panel-upload" class="panel" aria-labelledby="upload-heading">
+        <h1 id="upload-heading">Upload</h1>
+        <p class="panel-subtitle">Drop any file into the terminal zone or browse manually.</p>
+
+        <div id="dropZone" class="drop-zone" tabindex="0" role="button" aria-label="File upload drop zone">
+          <p>Drag &amp; drop a file here</p>
+          <p class="drop-zone-sub">or</p>
+          <button id="browseBtn" class="btn" type="button">Browse</button>
+          <input id="fileInput" type="file" hidden />
+        </div>
+
+        <div class="actions-row">
+          <button id="clearBtn" class="btn btn-danger" type="button">Clear</button>
+        </div>
+
+        <article class="meta-block" aria-labelledby="metadata-heading">
+          <h2 id="metadata-heading">File Metadata</h2>
+          <dl id="fileMeta" class="meta-grid">
+            <div><dt>Name</dt><dd>-</dd></div>
+            <div><dt>Size</dt><dd>-</dd></div>
+            <div><dt>Type</dt><dd>-</dd></div>
+            <div><dt>Last Modified</dt><dd>-</dd></div>
+          </dl>
+        </article>
+      </section>
+
+      <section id="panel-preview" class="panel" aria-labelledby="preview-heading">
+        <h1 id="preview-heading">Preview</h1>
+        <p class="panel-subtitle">Terminal-rendered content appears below when a file is loaded.</p>
+
+        <article id="previewContainer" class="preview-block" aria-live="polite">
+          <p class="muted">No file loaded.</p>
+        </article>
+      </section>
+
+      <section id="panel-about" class="panel" aria-labelledby="about-heading">
+        <h1 id="about-heading">About</h1>
+        <article class="about-block">
+          <p>
+            CHIPTERM is a local-first terminal-styled file inspector. Drop in files and instantly inspect metadata,
+            text source with line numbers, or media previews without leaving this static page.
+          </p>
+          <p class="privacy-note">
+            <strong>Privacy note:</strong> files are processed locally in your browser only; nothing is uploaded.
+          </p>
+        </article>
+      </section>
+    </div>
+  </main>
+
+  <div id="toastStack" class="toast-stack" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
